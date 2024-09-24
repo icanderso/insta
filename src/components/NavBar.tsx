@@ -1,17 +1,17 @@
-// src/app/profil/[id]/page.tsx
+// src/app/components/navbar/page.tsx
 
 
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 
-export const metadata = { title: "Detail profilu | insta "};
+export const metadata = { title: "Hlavna navigacia | insta "};
 
-export default function ProfilDetail() {
+export default function NavBar() {
 
   return (
     <Container>
-     <Typography> Detail profilu </Typography>
+     <Typography> Hlavna Navigacia </Typography>
     </Container>
   );
 }
