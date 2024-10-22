@@ -1,10 +1,13 @@
-import type { Metadata } from "next";
-import "./globals.css";
+// src/app/layout.tsx
 
+import { Metadata } from "next";
+import "./globals.css";
+import Navbar from "../components/NavBar";
+import AuthProvider from "../components/AuthProvider";
 
 export const metadata: Metadata = {
   title: "insta",
-  description: "Anderson creation",
+  description: "Created by Isabella Anderson",
 };
 
 export default function RootLayout({
@@ -15,8 +18,17 @@ export default function RootLayout({
   return (
     <html lang="sk">
       <body>
-        {children}
+        <AuthProvider>
+          <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+            <main style={{ flexGrow: 1 }}>
+              {children}
+            </main>
+          </div>
+          <Navbar /> 
+        </AuthProvider>
       </body>
     </html>
   );
 }
+
+

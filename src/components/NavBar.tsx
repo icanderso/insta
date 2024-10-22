@@ -1,20 +1,5 @@
-// src/app/components/navbar/page.tsx
 
-//import Typography from "@mui/material/Typography";
-//import Container from "@mui/material/Container";
-
-
-//export const metadata = { title: "Hlavna navigacia | insta "};
-
-//export default function NavBar() {
-
- // return (
-  //  <Container>
-  //   <Typography> Hlavna Navigacia </Typography>
-  //  </Container>
-//  );
-//}
-
+"use client"
 
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
@@ -48,7 +33,7 @@ const Navbar = () => {
         </Typography>
 
         <Button color="inherit">
-          <Link href="/app/prispevok" passHref style={{ color: 'inherit', textDecoration: 'none' }}>
+          <Link href="/prispevok" passHref style={{ color: 'inherit', textDecoration: 'none' }}>
             Príspevok
           </Link>
         </Button>
@@ -56,7 +41,7 @@ const Navbar = () => {
         {!session ? (
           <>
             <Button color="inherit">
-              <Link href="/app/registracia" passHref style={{ color: 'inherit', textDecoration: 'none' }}>
+              <Link href="/auth/registracia" passHref style={{ color: 'inherit', textDecoration: 'none' }}>
                 Registrácia
               </Link>
             </Button>
@@ -66,7 +51,7 @@ const Navbar = () => {
           <>
             <Button color="inherit" onClick={() => signOut()}>Odhlásenie</Button>
             <Button color="inherit">
-              <Link href="/app/profil" passHref style={{ color: 'inherit', textDecoration: 'none' }}>
+              <Link href="/profil" passHref style={{ color: 'inherit', textDecoration: 'none' }}>
                 Profil
               </Link>
             </Button>
@@ -79,19 +64,3 @@ const Navbar = () => {
 
 export default Navbar;
 
-
-
-//import React from 'react';
-//import Navbar from '../components/Navbar'; // Make sure this path points to your Navbar component
-import '../globals.css';
-
-const Layout = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <>
-      <Navbar />
-      <main>{children}</main>
-    </>
-  );
-};
-
-//export default Layout;

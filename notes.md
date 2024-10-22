@@ -21,3 +21,17 @@ VERCEL – cloudova platforma
  git branch -m <name> - zmena mena branchu
 git add . – updatovanie alebo pridavanie nove casti kodu do githubu
 BREAK POINT – je to miesto kde nastava ukoncenie programu
+
+home page - non authorized person -- authorization - registracia alebo prihlasenie : vytvorit stranku pre ludi ktory sa vedia registrovat a maju ucet a su autorizovany a potom inu stranku  pre neautorizovanych
+
+git ignore subor - nedavaj ten subor na github / nase sukromne info sa nedostanu na github
+
+
+
+../components/AuthProvider - relativny import
+
+
+stranky citaju iba html - nepoznaju typescript alebo nextjs.......
+
+
+
