@@ -11,9 +11,20 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
+
+
 const Navbar = () => {
   const { data: session } = useSession();
-
+  const Navbar = () => {
+    return (
+      <nav style={{ display: 'flex', gap: '1rem', padding: '1rem' }}>
+        <Link href="/">Domov</Link>
+        <Link href="/posts">Príspevky</Link>
+        <Link href="/registration">Registrácia</Link>
+        <Link href="/login">Prihlásenie</Link>
+      </nav>
+    );
+  };
   return (
     <AppBar position="static">
       <Toolbar>
@@ -61,6 +72,7 @@ const Navbar = () => {
     </AppBar>
   );
 };
+
 
 export default Navbar;
 

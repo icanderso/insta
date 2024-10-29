@@ -1,26 +1,21 @@
-
 // src/app/api/auth/[...nextauth]/authOptions.ts
-
-import { NextAuthOptions } from "next-auth";
+import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-export const authOptions: NextAuthOptions = {
+export const authOptions = {
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      // Add scopes to request additional information
+      authorization: {
+        params: {
+          scope: "profile email", // Ensure you request profile and email scopes
+        },
+      },
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET,
-  pages: {
-    signIn: '/auth/prihlasenie',
-    signOut: '/auth/odhlasenie',
-  },
-  callbacks: {
-    async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
-      // Redirect to home page after sign-in
-      return baseUrl || url; // baseUrl is automatically set from NEXTAUTH_URL in .env
-    },
-  },
+  // Additional NextAuth options can go here
 };
 
+export default NextAuth(authOptions);
