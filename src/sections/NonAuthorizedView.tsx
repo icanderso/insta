@@ -1,15 +1,11 @@
 // src/sections/NonAuthorizedView.tsx
 import React from "react";
 
-interface NonAuthorizedViewProps {
-  children: React.ReactNode; // Declare children as a prop
-}
-
-const NonAuthorizedView: React.FC<NonAuthorizedViewProps> = ({ children }) => {
+const NonAuthorizedView: React.FC = () => {
   return (
     <div>
       <h2>You are not authorized to view this page.</h2>
-      {children} {/* Render the children here */}
+      <p>Please register or log in to continue.</p>
     </div>
   );
 };
