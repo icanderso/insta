@@ -35,3 +35,4 @@ stranky citaju iba html - nepoznaju typescript alebo nextjs.......
 
 
 
+vercel
