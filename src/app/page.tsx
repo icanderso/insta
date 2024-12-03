@@ -1,44 +1,28 @@
 
-// src/app/auth/registracia/page.tsx
-"use client";
+// src\app\page.tsx
 
-import { signIn, useSession } from "next-auth/react"; // Import signIn from next-auth
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../app/api/auth/[...nextauth]/authOptions";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button"; // Import Material-UI Button
-import AuthorizedView from "@/sections/AuthorizedView";
-import NonAuthorizedView from "@/sections/NonAuthorizedView"; // Correct import
 
-export default function Registracia() {
-  const { data: session, status } = useSession();
+export const metadata = { title: "Domov | ZoškaSnap" };
 
-  if (status === "loading") {
-    return <Typography>Loading...</Typography>;
+export default async function HomePage() {
+  // Fetch session on the server
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    // Redirect authenticated users to the feed page
+    redirect("/prispevok");
   }
 
+  // Show the unauthenticated home view for non-authenticated users
   return (
     <Container>
-      {session ? (
-        // If the user is authenticated, show the Authorized View
-        <AuthorizedView />
-      ) : (
-        // If the user is not authenticated, show the Non-Authorized View
-        <NonAuthorizedView />
-      )}
-
-      {/* Show registration form for unauthenticated users */}
-      {!session && (
-        <div>
-          <Typography variant="h6">Please register to continue</Typography>
-          <Button
-            variant="contained"
-            onClick={() => signIn("google")} // Trigger Google login or registration
-            color="primary"
-          >
-            Register with Google
-          </Button>
-        </div>
-      )}
+      <Typography variant='h3'> Domovská stránka - NEprihlásený user </Typography>
+      <Typography variant='h6'> Registrujte sa, aby ste mohli pridať príspevky a zobraziť profil. </Typography>
     </Container>
   );
 }
