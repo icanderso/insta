@@ -1,59 +1,87 @@
 "use client";
 
-import React from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+import { useState } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
+import Box from "@mui/material/Box";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import Avatar from "@mui/material/Avatar";
+import HomeIcon from "@mui/icons-material/Home";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
+import InfoIcon from "@mui/icons-material/Info";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import LoginIcon from "@mui/icons-material/Login";
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
 
-const Navbar = () => {
-  const { data: session } = useSession(); // Get session data
+export default function Navbar() {
+  const { data: session } = useSession();
+  const [value, setValue] = useState(0);
 
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-          <MenuIcon />
-        </IconButton>
+    <Box
+      sx={{
+        width: "100%",
+        position: "fixed",
+        bottom: 0,
+        boxShadow: 3,
+        zIndex: 1000,
+        bgcolor: "background.paper",
+      }}
+    >
+      <BottomNavigation
+        value={value}
+        onChange={(event, newValue) => setValue(newValue)}
+      >
+        {/* Home Page */}
+        <Link href="/" passHref>
+          <BottomNavigationAction label="Home" icon={<HomeIcon />} />
+        </Link>
 
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Link href="/" passHref style={{ color: "inherit", textDecoration: "none" }}>
-            Domov {/* Home */}
-          </Link>
-        </Typography>
-
-        <Button color="inherit">
-          <Link href="/prispevok" passHref style={{ color: "inherit", textDecoration: "none" }}>
-            Príspevok
-          </Link>
-        </Button>
-
-        {!session ? (
+        {/* Authenticated User Options */}
+        {session ? (
           <>
-            <Button color="inherit">
-              <Link href="/auth/registracia" passHref style={{ color: "inherit", textDecoration: "none" }}>
-                Registrácia
-              </Link>
-            </Button>
-            <Button color="inherit" onClick={() => signIn()}>Prihlásenie</Button>
+            <Link href="/add" passHref>
+              <BottomNavigationAction label="Add" icon={<AddCircleIcon />} />
+            </Link>
+            <BottomNavigationAction
+              label="Logout"
+              icon={<LogoutIcon />}
+              onClick={() => signOut()}
+            />
+            <Link href="/profile" passHref>
+              <BottomNavigationAction
+                label="Profile"
+                icon={<Avatar alt={session.user?.name || "User"} src={session.user?.image || ""} />}
+              />
+            </Link>
+            <Link href="/prispevok" passHref>
+              <BottomNavigationAction label="post" icon={<InfoIcon />} />
+            </Link>
           </>
         ) : (
+          // Non-Authenticated User Options
           <>
-            <Button color="inherit" onClick={() => signOut()}>Odhlásenie</Button>
-            <Button color="inherit">
-              <Link href="/profil" passHref style={{ color: "inherit", textDecoration: "none" }}>
-                Profil
-              </Link>
-            </Button>
+         
+            <Link href="/auth/registracia" passHref>
+              <BottomNavigationAction label="Register" icon={<AppRegistrationIcon />} />
+            </Link>
+            <BottomNavigationAction
+              label="Login"
+              icon={<LoginIcon />}
+              onClick={() => signIn("google")}
+              
+            <Link href="/auth/prihlasenie" passHref>
+              <BottomNavigationAction label="Log in" icon={<AppLoginIcon />} />
+            </Link>
+            <BottomNavigationAction
+              label="Login"
+              icon={<LoginIcon />}
+              onClick={() => signIn("google")}
+            />
           </>
         )}
-      </Toolbar>
-    </AppBar>
+      </BottomNavigation>
+    </Box>
   );
-};
-
-export default Navbar;
+}

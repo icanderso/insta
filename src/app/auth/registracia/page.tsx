@@ -1,27 +1,41 @@
 // src/app/auth/registracia/page.tsx
 
-"use client"
+"use client";
 
-import { signIn } from "next-auth/react"; // Import signIn function from next-auth
+
+import { signIn } from "next-auth/react";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button"; // Import Material-UI Button
+import Button from "@mui/material/Button";
 
-// export const metadata = { title: "User Registration | InstaClone" };
-
-export default function SignUpPage() {
-
+export default function RegisterPage() {
   return (
-    <Container>
-      <Typography variant="h6">Please log in to continue</Typography>
-      <Button 
-        variant="contained" 
-        onClick={() => signIn("google")} // Trigger Google login
+    <Container
+      maxWidth="xs"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        mt: 5,
+        p: 3,
+        bgcolor: "background.paper",
+        boxShadow: 3,
+        borderRadius: 2,
+      }}
+    >
+      <Typography variant="h5" sx={{ mb: 3 }}>
+        Sign In with Google
+      </Typography>
+      <Typography variant="body1" sx={{ mb: 3 }}>
+        Please sign in to create an account and start using our services.
+      </Typography>
+      <Button
+        variant="contained"
+        onClick={() => signIn("google")}
         color="primary"
       >
-        Log in with Google
+        Sign In with Google
       </Button>
     </Container>
   );
 }
-

@@ -21,7 +21,7 @@ export default async function HomePage() {
   // Show the unauthenticated home view for non-authenticated users
   return (
     <Container>
-      <Typography variant='h3'> Domovská stránka - NEprihlásený user </Typography>
+      <Typography variant='h3'> Domovská stránka - nieste prihlásený </Typography>
       <Typography variant='h6'> Registrujte sa, aby ste mohli pridať príspevky a zobraziť profil. </Typography>
     </Container>
   );
