@@ -62,23 +62,17 @@ export default function Navbar() {
         ) : (
           // Non-Authenticated User Options
           <>
-         
             <Link href="/auth/registracia" passHref>
               <BottomNavigationAction label="Register" icon={<AppRegistrationIcon />} />
             </Link>
             <BottomNavigationAction
               label="Login"
-              icon={<LoginIcon />}
-              onClick={() => signIn("google")}
-              
-            <Link href="/auth/prihlasenie" passHref>
-              <BottomNavigationAction label="Log in" icon={<AppLoginIcon />} />
-            </Link>
-            <BottomNavigationAction
-              label="Login"
-              icon={<LoginIcon />}
+              icon={<LoginIcon />} // This is correctly used here
               onClick={() => signIn("google")}
             />
+            <Link href="/auth/prihlasenie" passHref>
+              <BottomNavigationAction label="Log in" icon={<LoginIcon />} />
+            </Link>
           </>
         )}
       </BottomNavigation>
